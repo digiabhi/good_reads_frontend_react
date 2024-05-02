@@ -1,6 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Signin() {
+  const [signinDetails, setSigninDetails] = useState({
+    email: "",
+    password: "",
+  });
+  function handleFormChange(e) {
+    const { name, value } = e.target;
+    setSigninDetails({ ...signinDetails, [name]: value });
+  }
+  function onFormSubmit(e) {
+    e.preventDefault();
+  }
   return (
     <div className="h-[100vh] flex flex-col items-center justify-center">
       <div>
@@ -20,13 +32,17 @@ export default function Signin() {
         <form
           className="flex flex-col justify-center items-center w-3/4 mx-auto"
           autoComplete="off"
+          onSubmit={onFormSubmit}
         >
-          <div className="my-5 w-1/3">
+          <div className="my-5 w-1/3 text-black">
             <input
               autoComplete="off"
               type="email"
               placeholder="email..."
               className="px-8 py-3 bg-white w-full"
+              name="email"
+              onChange={handleFormChange}
+              value={signinDetails.email}
             />
           </div>
           <div className="my-5 w-1/3">
@@ -35,6 +51,9 @@ export default function Signin() {
               type="password"
               placeholder="password..."
               className="px-8 py-3 bg-white w-full"
+              name="password"
+              onChange={handleFormChange}
+              value={signinDetails.password}
             />
           </div>
           <div className="my-5 w-1/3">
