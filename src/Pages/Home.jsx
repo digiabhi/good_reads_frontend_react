@@ -1,4 +1,5 @@
 import Logo from "Assets/Images/logo-color.png";
+import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center gap-20 h-[100vh]">
@@ -17,10 +18,10 @@ export default function Home() {
         </div>
         <div>
           <button className="btn btn-primary rounded-md px-5 py-2 text-xl">
-            Register
+            <Link to="/signup">Register</Link>
           </button>
           <button className="btn btn-warning rounded-md mx-3 px-5 py-2 text-xl">
-            Login
+            <Link to="/login">Login</Link>
           </button>
         </div>
       </div>
