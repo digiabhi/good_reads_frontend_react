@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "Redux/Slices/AuthSlice";
-
 export default function Signup() {
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [signupDetails, setSignupDetails] = useState({
     username: "",
     email: "",
@@ -15,10 +14,22 @@ export default function Signup() {
     const { name, value } = e.target;
     setSignupDetails({ ...signupDetails, [name]: value });
   }
+
+  function resetForm() {
+    setSignupDetails({
+      username: "",
+      email: "",
+      password: "",
+    });
+  }
+
   async function onFormSubmit(e) {
     e.preventDefault();
-    const response = await dispatch(signup(setSignupDetails));
-    console.log(response);
+    const response = await dispatch(signup(signupDetails));
+    if (response?.payload?.data) {
+      navigate("/signin");
+    }
+    resetForm();
   }
   return (
     <div className="h-[100vh] flex flex-col items-center justify-center">
